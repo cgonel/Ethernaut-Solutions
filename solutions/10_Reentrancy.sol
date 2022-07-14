@@ -2,6 +2,14 @@
 
 pragma solidity ^0.8.15;
 
+/**
+    @title Hacker contract for Reentrance
+    @notice Since the effect of the balance is changed only after sending the balance, it's possible to use the fallback of an external contract to keep calling the function.
+            The call will continue to pass the check since it never reaches the code to make the change to the balance.
+            To protect against re-entrancy, we use check-effect-interaction pattern.
+*/
+
+
 interface Reentrance {
     function donate(address _to) external payable; 
     function withdraw(uint) external;
